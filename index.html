@@ -59,14 +59,14 @@ body::after {
 /* HEADER */
 header {
   position: fixed; width: 100%; top: 0;
-  padding: 32px 7%;
+  padding: 10px 2%;
   display: flex; justify-content: space-between; align-items: center;
   z-index: 10050; transition: all .5s ease;
 }
 header.scrolled {
   background: rgba(6,6,10,0.94);
   backdrop-filter: blur(24px);
-  padding: 20px 7%;
+  padding: 15px 5%;
   border-bottom: 1px solid rgba(201,168,76,0.12);
 }
 .logo {
@@ -556,6 +556,35 @@ footer {
 }
 </style>
 </head>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzYlGzaeTSotWVJzv2esh-UUYtauRxVJjOMrliBYHiISN6EYxpRtpzcNV3QZyy0NDKRow/exec";
+
+document.getElementById("enquiryForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const data = {
+    firstName: document.getElementById("first_name").value,
+    lastName: document.getElementById("last_name").value,
+    company: document.getElementById("company").value,
+    email: document.getElementById("email").value,
+    eventType: document.getElementById("event_type").value,
+    vision: document.getElementById("message").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(response => {
+    alert("Thank you! Your enquiry has been submitted.");
+    document.getElementById("enquiryForm").reset();
+  })
+  .catch(error => {
+    alert("Something went wrong. Please try again.");
+  });
+});
+</script>
 <body>
 
 <div class="cursor" id="cursor"></div>
@@ -792,7 +821,7 @@ footer {
         <div class="c-icon">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-        <div class="c-text"><span>Email</span><p>travelstrikersindia@gmail.com</p></div>
+        <div class="c-text"><span>Email</span><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5d1d7c4d3c0c9d6d1d7cccec0d7d6cccbc1ccc4e5c2c8c4ccc98bc6cac8">[email&#160;protected]</a></p></div>
       </div>
       <div class="c-item">
         <div class="c-icon">
@@ -811,33 +840,68 @@ Uttar Pradesh, India</p></div>
       </div>
     </div>
   </div>
-<form class="reveal" action="https://formsubmit.co/travelstrikersindia@gmail.com" method="POST">
-    <div class="form-row">
-      <div class="form-field"><label>First Name</label><input type="text" name="first_name" placeholder="Alexandra" required></div>
-      <div class="form-field"><label>Last Name</label><input type="text" name="last_name" placeholder="Chen"></div>
-    </div>
-    <div class="form-field"><label>Company</label><input type="text" name="company" placeholder="Your Company Name" required></div>
-    <div class="form-field"><label>Email Address</label><input type="email" name="email" placeholder="hello@company.com" required></div>
+  
+<!-- Hidden iframe for form submission -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<form id="enquiryForm" class="reveal" 
+      action="https://script.google.com/macros/s/AKfycbzYlGzaeTSotWVJzv2esh-UUYtauRxVJjOMrliBYHiISN6EYxpRtpzcNV3QZyy0NDKRow/exec" 
+      method="POST" 
+      target="hidden_iframe"
+      onsubmit="return handleFormSubmit(this);">
+  
+  <div class="form-row">
     <div class="form-field">
-      <label>Event Type</label>
-      <select name="event_type">
-        <option value="" disabled selected>Select a service</option>
-        <option>Corporate Conference</option>
-        <option>Destination Event</option>
-        <option>Leadership Retreat</option>
-        <option>Incentive Travel</option>
-        <option>Team Building</option>
-        <option>Annual Offsite</option>
-      </select>
+      <label>First Name</label>
+      <input type="text" name="first_name" id="first_name" placeholder="Alexandra" required>
     </div>
-    <div class="form-field"><label>Your Vision</label><textarea name="message" placeholder="Share your event goals, expected attendees, preferred destination or timeline..."></textarea></div>
-    <input type="hidden" name="_subject" value="New Event Enquiry - Travel Strikers">
-    <input type="hidden" name="_captcha" value="false">
-    <button type="submit" class="btn-submit">
-      Send Enquiry
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </button>
-  </form>
+
+    <div class="form-field">
+      <label>Last Name</label>
+      <input type="text" name="last_name" id="last_name" placeholder="Chen">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label>Company</label>
+    <input type="text" name="company" id="company" placeholder="Your Company Name" required>
+  </div>
+
+  <div class="form-field">
+    <label>Email Address</label>
+    <input type="email" name="email" id="email" placeholder="hello@company.com" required>
+  </div>
+
+  <div class="form-field">
+    <label>Event Type</label>
+    <select name="event_type" id="event_type" required>
+      <option value="" disabled selected>Select a service</option>
+      <option value="Corporate Conference">Corporate Conference</option>
+      <option value="Destination Event">Destination Event</option>
+      <option value="Leadership Retreat">Leadership Retreat</option>
+      <option value="Incentive Travel">Incentive Travel</option>
+      <option value="Team Building">Team Building</option>
+      <option value="Annual Offsite">Annual Offsite</option>
+    </select>
+  </div>
+
+  <div class="form-field">
+    <label>Your Vision</label>
+    <textarea name="message" id="message" placeholder="Share your event goals, expected attendees, preferred destination or timeline..."></textarea>
+  </div>
+  
+  <!-- Hidden timestamp field -->
+  <input type="hidden" name="timestamp" id="timestamp">
+
+  <button type="submit" class="btn-submit" id="submitBtn">
+    Send Enquiry
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </button>
+  
+  <div id="formMessage" style="display:none; margin-top:20px; padding:15px; border-radius:8px; text-align:center;"></div>
+</form>
 </section>
 
 <!-- FOOTER -->
@@ -863,7 +927,7 @@ Uttar Pradesh, India</p></div>
     </div>
     <div class="footer-col">
       <h5>Contact</h5>
-      <a href="mailto:travelstrikersindia@gmail.com">travelstrikersindia@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#5622243720333a2522243f3d3324253f38323f3716313b373f3a7835393b"><span class="__cf_email__" data-cfemail="c8bcbaa9beada4bbbcbaa1a3adbabba1a6aca1a988afa5a9a1a4e6aba7a5">[email&#160;protected]</span></a>
       <p class="contact-address footer-address">Golden-I, Shop No- D&amp;E-228B, Block- D&amp;E
 Plot No-11, Sector-Techzone IV, Greater Noida West,
 UP-201308
@@ -880,7 +944,7 @@ Uttar Pradesh, India</p>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Cursor
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
@@ -909,18 +973,63 @@ document.querySelectorAll('a,button,.s-card,.g-item').forEach(el=>{
 const hdr=document.getElementById('header');
 window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>60));
 
-// Reveal
-const reveals=document.querySelectorAll('.reveal');
-reveals.forEach(el=>el.classList.add('hidden'));
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.remove('hidden'),i*90);
-      obs.unobserve(e.target);
+// Reveal animation
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
     }
   });
-},{threshold:0.06});
-reveals.forEach(el=>obs.observe(el));
+}, { threshold: 0.1 });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ========================================
+// GOOGLE SHEETS FORM SUBMISSION (iframe method)
+// ========================================
+
+function handleFormSubmit(form) {
+  // Set timestamp
+  document.getElementById('timestamp').value = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  
+  const submitBtn = document.getElementById('submitBtn');
+  const formMessage = document.getElementById('formMessage');
+  const originalBtnText = submitBtn.innerHTML;
+  
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+  
+  // Show success message after a short delay (form submits to iframe)
+  setTimeout(function() {
+    // Show success message
+    formMessage.style.display = 'block';
+    formMessage.style.background = 'rgba(76, 175, 80, 0.15)';
+    formMessage.style.border = '1px solid rgba(76, 175, 80, 0.4)';
+    formMessage.style.color = '#81C784';
+    formMessage.innerHTML = '✓ Thank you! Your enquiry has been submitted successfully. We will get back to you soon.';
+    
+    // Reset form
+    form.reset();
+    
+    // Restore button
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+    
+    // Hide message after 5 seconds
+    setTimeout(function() {
+      formMessage.style.display = 'none';
+    }, 5000);
+  }, 1500);
+  
+  // Allow form to submit
+  return true;
+}
+
+// Add spin animation for loading
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+document.head.appendChild(style);
 </script>
 </body>
 </html>
