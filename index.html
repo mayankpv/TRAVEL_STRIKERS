@@ -811,13 +811,13 @@ Uttar Pradesh, India</p></div>
       </div>
     </div>
   </div>
-  <div class="reveal">
+  <form class="reveal" action="https://formsubmit.co/travelstrikersindia@gmail.com" method="POST">
     <div class="form-row">
-      <div class="form-field"><label>First Name</label><input type="text" placeholder="Alexandra"></div>
+      <div class="form-field"><label>First Name</label><input type="text" placeholder="Alexandra" required></div>
       <div class="form-field"><label>Last Name</label><input type="text" placeholder="Chen"></div>
     </div>
-    <div class="form-field"><label>Company</label><input type="text" placeholder="Your Company Name"></div>
-    <div class="form-field"><label>Email Address</label><input type="email" placeholder="hello@company.com"></div>
+    <div class="form-field"><label>Company</label><input type="text" placeholder="Your Company Name" required></div>
+    <div class="form-field"><label>Email Address</label><input type="email" placeholder="hello@company.com" required></div>
     <div class="form-field">
       <label>Event Type</label>
       <select>
@@ -831,11 +831,13 @@ Uttar Pradesh, India</p></div>
       </select>
     </div>
     <div class="form-field"><label>Your Vision</label><textarea placeholder="Share your event goals, expected attendees, preferred destination or timeline..."></textarea></div>
+    <input type="hidden" name="_subject" value="New Event Enquiry - Travel Strikers">
+<input type="hidden" name="_captcha" value="false">
     <button class="btn-submit">
       Send Enquiry
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
-  </div>
+  </form>
 </section>
 
 <!-- FOOTER -->
