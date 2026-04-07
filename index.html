@@ -811,16 +811,16 @@ Uttar Pradesh, India</p></div>
       </div>
     </div>
   </div>
-  <form class="reveal" action="https://formsubmit.co/travelstrikersindia@gmail.com" method="POST">
+<form class="reveal" action="https://formsubmit.co/travelstrikersindia@gmail.com" method="POST">
     <div class="form-row">
-      <div class="form-field"><label>First Name</label><input type="text" placeholder="Alexandra" required></div>
-      <div class="form-field"><label>Last Name</label><input type="text" placeholder="Chen"></div>
+      <div class="form-field"><label>First Name</label><input type="text" name="first_name" placeholder="Alexandra" required></div>
+      <div class="form-field"><label>Last Name</label><input type="text" name="last_name" placeholder="Chen"></div>
     </div>
-    <div class="form-field"><label>Company</label><input type="text" placeholder="Your Company Name" required></div>
-    <div class="form-field"><label>Email Address</label><input type="email" placeholder="hello@company.com" required></div>
+    <div class="form-field"><label>Company</label><input type="text" name="company" placeholder="Your Company Name" required></div>
+    <div class="form-field"><label>Email Address</label><input type="email" name="email" placeholder="hello@company.com" required></div>
     <div class="form-field">
       <label>Event Type</label>
-      <select>
+      <select name="event_type">
         <option value="" disabled selected>Select a service</option>
         <option>Corporate Conference</option>
         <option>Destination Event</option>
@@ -830,10 +830,10 @@ Uttar Pradesh, India</p></div>
         <option>Annual Offsite</option>
       </select>
     </div>
-    <div class="form-field"><label>Your Vision</label><textarea placeholder="Share your event goals, expected attendees, preferred destination or timeline..."></textarea></div>
+    <div class="form-field"><label>Your Vision</label><textarea name="message" placeholder="Share your event goals, expected attendees, preferred destination or timeline..."></textarea></div>
     <input type="hidden" name="_subject" value="New Event Enquiry - Travel Strikers">
-<input type="hidden" name="_captcha" value="false">
-    <button class="btn-submit">
+    <input type="hidden" name="_captcha" value="false">
+    <button type="submit" class="btn-submit">
       Send Enquiry
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
